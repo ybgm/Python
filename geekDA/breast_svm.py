@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-data = pd.read_csv(r'D:\code\codegit\Python\geekDA\data23.csv')
+data = pd.read_csv(r'.\geekDA\data23.csv')
+#需工作的最近根文件目录，不区分大小写
+#相对路径，编辑launch.json，在configuration中使用参数"cwd":"${fileDirname}" 调试模式可以，普通运行报错
 
 pd.set_option('display.max_columns',None) #把折叠的列显示出来，none=不限制列数
 """ print ('describe' + '-'*30)
