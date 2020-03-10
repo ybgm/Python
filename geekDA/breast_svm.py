@@ -1,10 +1,14 @@
 import pandas as pd 
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn import svm
+from sklearn.preprocessing import StandardScaler
+from sklearn import metrics
 
 
-data = pd.read_csv(r'.\geekDA\data23.csv')
-#需工作的最近根文件目录，不区分大小写
+data = pd.read_csv(r'.\python\geekDA\data23.csv')
+#需工作的最近根文件目录，不区分大小写 Python\geekDA\data23.csv 
 #相对路径，编辑launch.json，在configuration中使用参数"cwd":"${fileDirname}" 调试模式可以，普通运行报错
 
 pd.set_option('display.max_columns',None) #把折叠的列显示出来，none=不限制列数
@@ -35,7 +39,7 @@ from collections import Counter
 print (Counter(data['diagnosis']))
 
 sns.countplot(data['diagnosis'],label="count")
-plt.show()
+#plt.show()
 #plt.savefig(r'D:\code\codegit\Python\geekDA\23diacount.png')
 #用热力图呈现features_mean字段之间的相关性
 corr=data[features_mean].corr() 
@@ -43,5 +47,27 @@ corr=data[features_mean].corr()
 plt.figure(figsize=(14,14))
 # annot=True显示每个方格的数据
 sns.heatmap(corr,annot=True)
-plt.show()
+#plt.show()
 #plt.savefig(r'D:\code\codegit\Python\geekDA\热力图.png')
+
+
+# 特征选择
+features_remain = ['radius_mean','texture_mean', 'smoothness_mean','compactness_mean','symmetry_mean', 'fractal_dimension_mean'] 
+train,test = train_test_split(data,test_size=0.3)
+# 抽取特征选择的数值作为训练和测试数据
+train_x = train[features_remain]
+train_y = train['diagnosis']
+test_x = train[features_remain]
+test_y = train['diagnosis']
+
+#用Z-Score规范化数据，保证每个特征维度的数据值为0，方差为1
+ss = StandardScaler()
+train_x = ss.fit_transform(train_x)
+test_x = ss.fit_transform(test_x)
+
+#创建SVM分类器
+model = svm.SVC()
+model.fit(train_x,train_y)
+#用测试数据做预测
+prediction = model.predict(test_x)
+print ('准确率：',metrics.accuracy_score(prediction,test_y))
