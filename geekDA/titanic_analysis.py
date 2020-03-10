@@ -1,7 +1,7 @@
 import pandas as pd
 
-train_data = pd.read_csv(r'E:\code_git\Python\GeekDA\train.csv')
-test_data = pd.read_csv(r'E:\code_git\Python\GeekDA\test.csv')
+train_data = pd.read_csv(r'.\Python\geekDA\train.csv')
+test_data = pd.read_csv(r'.\Python\geekDA\test.csv')
 
 """ 
 print ('info' + '-'*26)
@@ -35,8 +35,8 @@ test_data['Embarked'].fillna('S',inplace=True)
 #特征选择
 features = ['Pclass','Sex','Age','SibSp','Parch','Fare','Embarked']
 train_features = train_data[features]
-train_labels = train_data['Survived']
-test_features = test_data[features]
+train_labels = train_data['Survived'] #训练数据
+test_features = test_data[features] #测试预测数据
 
 #sklearn  DictVectorizer
 from sklearn.feature_extraction import DictVectorizer
@@ -70,4 +70,4 @@ import graphviz
 from sklearn import tree 
 dot_data = tree.export_graphviz(clf,out_file=None)
 graph = graphviz.Source(dot_data)
-graph.render(r'E:\code_git\Python\GeekDA\tree')
+#graph.render(r'E:\code_git\Python\GeekDA\tree')
