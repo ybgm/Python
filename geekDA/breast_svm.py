@@ -63,7 +63,7 @@ test_y = train['diagnosis']
 #用Z-Score规范化数据，保证每个特征维度的数据值为0，方差为1
 ss = StandardScaler()
 train_x = ss.fit_transform(train_x)
-test_x = ss.fit_transform(test_x)
+test_x = ss.transform(test_x)
 
 #创建SVM分类器
 model = svm.SVC()
