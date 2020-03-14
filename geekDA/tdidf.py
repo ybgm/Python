@@ -37,4 +37,4 @@ test_features=test_tf.fit_transform(test_contents)
 predicted_labels=clf.predict(test_features)
 #计算准确率
 from sklearn import metrics
-print metrics.accuracy_score(test_labels, predicted_labels)
+print (metrics.accuracy_score(test_labels, predicted_labels)
