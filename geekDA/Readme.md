@@ -24,6 +24,7 @@ dot_data = tree.export_graphviz(clf,out_file=None)
 graph = graphviz.Source(dot_data)
 graph.view()
 
+19讲 在模型评估中，决策树提供了 score 函数可以直接得到准确率，但是我们并不知道真实的预测结果，所以无法用预测值和真实的预测结果做比较。我们只能使用训练集中的数据进行模型评估，可以使用决策树自带的 score 函数计算下得到的结果：
 
 sklearn 的全称叫 Scikit-learn，它给我们提供了 3 个朴素贝叶斯分类算法，分别是高斯朴素贝叶斯（GaussianNB）、多项式朴素贝叶斯（MultinomialNB）和伯努利朴素贝叶斯（BernoulliNB）。
 高斯朴素贝叶斯：特征变量是连续变量，符合高斯分布，比如说人的身高，物体的长度。
@@ -35,6 +36,14 @@ Term Frequency 和 Inverse Document Frequency
 词频 TF
 逆向文档频率 IDF
 TF-IDF=TF*IDF
+什么是停用词？停用词就是在分类中没有用的词，这些词一般词频 TF 高，但是 IDF 很低，起不到分类的作用。
 
 sklearn  TfidfVectorizer 类
 TfidfVectorizer(stop_words=stop_words, token_pattern=token_pattern)
+tfidf_vec.get_feature_names()
+tfidf_vec.vocabulary_)
+ tfidf_matrix.toarray()
+
+ from sklearn.naive_bayes import MultinomialNB 
+ score
+ accuracy_score
